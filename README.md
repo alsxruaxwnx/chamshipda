@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 기호 인식 시스템 (Chamshipda Symbol Recognition)
 
-## Getting Started
+손그림을 입력받아 기호를 인식하고 코드로 변환하는 Next.js 기반 웹 애플리케이션입니다.
 
-First, run the development server:
+## 🚀 시작하기
+
+### 설치
+
+```bash
+npm install
+```
+
+### 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어보세요.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 프로젝트 구조
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+chamshipda/
+├── app/
+│   ├── api/
+│   │   ├── analyze-drawing/    # 그림 분석 API
+│   │   └── analyze-symbol/     # 기호 분석 API
+│   ├── layout.tsx              # 레이아웃
+│   ├── page.tsx                # 메인 페이지
+│   └── globals.css             # 글로벌 스타일
+├── components/                 # React 컴포넌트
+├── public/                     # 정적 파일
+├── package.json
+├── tsconfig.json
+└── tailwind.config.ts
+```
 
-## Learn More
+## 🔧 기술 스택
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 14.2.35
+- **UI Library**: React 18.3.1
+- **Styling**: Tailwind CSS 3.4.19
+- **Language**: TypeScript 5
+- **CSS Framework**: @tailwindcss/postcss 4
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 기능
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✏️ 캔버스에 자유롭게 그리기
+- 🔍 손그림으로부터 기호 인식
+- 💻 인식된 기호를 코드로 자동 변환
+- 📊 실시간 기호 분석 및 표시
 
-## Deploy on Vercel
+## 🌿 브랜치
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **main**: 메인 브랜치
+- **기호-인식**: 기호 인식 기능 개발 브랜치
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 API 엔드포인트
+
+### POST /api/analyze-drawing
+
+그리기 이미지를 분석하여 기호 목록을 반환합니다.
+
+**Request**:
+```json
+{
+  "imageData": "data:image/png;base64,..."
+}
+```
+
+**Response**:
+```json
+{
+  "symbols": [
+    {
+      "name": "정사각형",
+      "description": "4개의 직각을 가진 도형",
+      "code": "const square = new Shape(\"square\");"
+    }
+  ]
+}
+```
+
+### POST /api/analyze-symbol
+
+특정 기호를 분석하여 코드를 생성합니다.
+
+**Request**:
+```json
+{
+  "symbolData": {
+    "type": "square"
+  }
+}
+```
+
+**Response**:
+```json
+{
+  "code": "const shape = new Square();",
+  "symbol": { "type": "square" }
+}
+```
+
+## 📦 배포
+
+### Vercel에 배포
+
+```bash
+npm run build
+npm run start
+```
+
+또는 Vercel 플랫폼에서 직접 배포할 수 있습니다.
+
+## 📄 라이선스
+
+MIT
